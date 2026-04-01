@@ -1,4 +1,12 @@
 (function () {
+  var MAX_RESUME_SIZE_MB = 8;
+  var MAX_RESUME_SIZE_BYTES = MAX_RESUME_SIZE_MB * 1024 * 1024;
+  var ALLOWED_RESUME_TYPES = {
+    "application/pdf": true,
+    "application/msword": true,
+    "application/vnd.openxmlformats-officedocument.wordprocessingml.document": true,
+  };
+
   var PARAM_TO_VALUE = {
     "technical-support-specialist": "technical-support-specialist",
     sdr: "sales-development-representative",
@@ -34,6 +42,24 @@
     var resumeInput = document.getElementById("apply-resume");
     var resumeFile = resumeInput && resumeInput.files && resumeInput.files[0] ? resumeInput.files[0] : null;
 
+    if (!resumeFile) {
+      showStatus(status, "Please select your resume file before submitting.", true);
+      if (submitBtn) submitBtn.disabled = false;
+      return;
+    }
+
+    if (!ALLOWED_RESUME_TYPES[resumeFile.type]) {
+      showStatus(status, "Invalid file type. Please upload a PDF, DOC, or DOCX file.", true);
+      if (submitBtn) submitBtn.disabled = false;
+      return;
+    }
+
+    if (resumeFile.size > MAX_RESUME_SIZE_BYTES) {
+      showStatus(status, "Resume is too large. Maximum file size is 8MB.", true);
+      if (submitBtn) submitBtn.disabled = false;
+      return;
+    }
+
     var payload = {
       role: form.elements.position ? form.elements.position.value : "",
       fullName: form.elements.full_name ? form.elements.full_name.value.trim() : "",
@@ -44,14 +70,36 @@
         ? form.elements.linkedin_or_portfolio.value.trim()
         : "",
       coverLetter: form.elements.cover_letter ? form.elements.cover_letter.value.trim() : "",
-      resumeFileName: resumeFile ? resumeFile.name : "",
+      resumeFileName: resumeFile.name,
     };
 
-    fetch("/api/application", {
+    var uploadData = new FormData();
+    uploadData.append("resume", resumeFile);
+
+    fetch("/api/upload-resume", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
+      body: uploadData,
     })
+      .then(function (res) {
+        return res.json().catch(function () {
+          return {};
+        }).then(function (data) {
+          if (!res.ok) {
+            throw new Error(data.error || "Could not upload your resume.");
+          }
+          return data;
+        });
+      })
+      .then(function (uploadResult) {
+        payload.resumeUrl = uploadResult.resumeUrl || "";
+        payload.resumeFileName = uploadResult.fileName || payload.resumeFileName;
+
+        return fetch("/api/application", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+      })
       .then(function (res) {
         return res.json().catch(function () {
           return {};
@@ -64,24 +112,22 @@
       })
       .then(function () {
         form.reset();
-        if (status) {
-          status.hidden = false;
-          status.textContent = "Application sent successfully. Thank you for applying.";
-          status.classList.remove("form-status--error");
-          status.classList.add("form-status--success");
-        }
+        showStatus(status, "Application sent successfully. Thank you for applying.", false);
       })
       .catch(function (err) {
-        if (status) {
-          status.hidden = false;
-          status.textContent = err.message || "Something went wrong. Please try again.";
-          status.classList.remove("form-status--success");
-          status.classList.add("form-status--error");
-        }
+        showStatus(status, err.message || "Something went wrong. Please try again.", true);
       })
       .finally(function () {
         if (submitBtn) submitBtn.disabled = false;
       });
+  }
+
+  function showStatus(statusEl, message, isError) {
+    if (!statusEl) return;
+    statusEl.hidden = false;
+    statusEl.textContent = message;
+    statusEl.classList.remove("form-status--success", "form-status--error");
+    statusEl.classList.add(isError ? "form-status--error" : "form-status--success");
   }
 
   function init() {

@@ -86,16 +86,13 @@
 
           <label class="form-label" for="apply-resume">Resume Upload <span class="form-label__req" aria-hidden="true">*</span></label>
           <input id="apply-resume" type="file" name="resume" required accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" />
-          <p class="form-file-hint">PDF or Word (DOC/DOCX), up to a reasonable file size for email or upload endpoints.</p>
+          <p class="form-file-hint">PDF or Word (DOC/DOCX), maximum 8MB.</p>
 
           <label class="form-label" for="apply-message">Short Message / Cover Letter <span class="form-label__req" aria-hidden="true">*</span></label>
           <textarea id="apply-message" name="cover_letter" rows="6" required placeholder="Tell us why you’re interested and what you’d bring to the role."></textarea>
 
           <button type="submit" class="btn">Submit application</button>
           <p class="contact-hint application-form__note" id="apply-status" role="status" aria-live="polite" hidden></p>
-          <p class="contact-hint application-form__note">
-            Resume upload currently sends only the selected file name in the email. File attachment handling can be added later via storage or multipart upload processing.
-          </p>
         </form>
       </div>
     </section>

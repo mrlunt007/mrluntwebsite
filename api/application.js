@@ -20,6 +20,7 @@ module.exports = async function handler(req, res) {
       body.linkedinOrPortfolio || body.linkedin_or_portfolio || "";
     const coverLetter = body.coverLetter || body.cover_letter || body.message || "";
     const resumeFileName = body.resumeFileName || "";
+    const resumeUrl = body.resumeUrl || "";
 
     if (!role || !fullName || !email || !phone || !location || !coverLetter) {
       return res.status(400).json({
@@ -42,7 +43,12 @@ module.exports = async function handler(req, res) {
         <p><strong>Phone:</strong> ${escapeHtml(phone)}</p>
         <p><strong>Location:</strong> ${escapeHtml(location)}</p>
         <p><strong>LinkedIn / Portfolio:</strong> ${escapeHtml(linkedinOrPortfolio || "Not provided")}</p>
-        <p><strong>Resume:</strong> ${escapeHtml(resumeFileName || "No filename provided")}</p>
+        <p><strong>Resume File Name:</strong> ${escapeHtml(resumeFileName || "Not provided")}</p>
+        <p><strong>Resume URL:</strong> ${
+          resumeUrl
+            ? `<a href="${escapeHtml(resumeUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(resumeUrl)}</a>`
+            : "Not provided"
+        }</p>
         <p><strong>Cover Letter:</strong></p>
         <p>${escapeHtml(coverLetter).replace(/\n/g, "<br/>")}</p>
       `,
