@@ -91,8 +91,17 @@
         });
       })
       .then(function (uploadResult) {
+        console.log("[careers-apply] Resume upload response", uploadResult);
+        if (!uploadResult || !uploadResult.resumeUrl) {
+          throw new Error("Resume upload did not return a URL.");
+        }
         payload.resumeUrl = uploadResult.resumeUrl || "";
         payload.resumeFileName = uploadResult.fileName || payload.resumeFileName;
+        console.log("[careers-apply] Sending application payload", {
+          role: payload.role,
+          resumeFileName: payload.resumeFileName,
+          resumeUrl: payload.resumeUrl,
+        });
 
         return fetch("/api/application", {
           method: "POST",

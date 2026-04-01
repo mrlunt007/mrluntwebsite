@@ -30,6 +30,20 @@ module.exports = async function handler(req, res) {
       });
     }
 
+    if (!resumeUrl) {
+      return res.status(400).json({
+        success: false,
+        error: "Missing required field: resumeUrl.",
+      });
+    }
+
+    console.log("[application] Email request ready", {
+      role,
+      email,
+      resumeFileName,
+      resumeUrl,
+    });
+
     await resend.emails.send({
       from: "PrimeSupport Careers <onboarding@resend.dev>",
       to: "contact@primesupportco.com",

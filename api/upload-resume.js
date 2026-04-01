@@ -1,5 +1,5 @@
 const { put } = require("@vercel/blob");
-const formidable = require("formidable");
+const { formidable } = require("formidable");
 const fs = require("fs/promises");
 
 const ALLOWED_MIME_TYPES = new Set([
@@ -15,6 +15,15 @@ module.exports = async function handler(req, res) {
   }
 
   try {
+    if (!process.env.BLOB_READ_WRITE_TOKEN) {
+      console.error("[upload-resume] Missing BLOB_READ_WRITE_TOKEN");
+      return res.status(500).json({
+        success: false,
+        error: "Blob storage is not configured.",
+      });
+    }
+
+    console.log("[upload-resume] Starting multipart parse");
     const file = await parseResumeFile(req);
 
     if (!file) {
@@ -41,12 +50,19 @@ module.exports = async function handler(req, res) {
       contentType: file.mimetype || "application/octet-stream",
     });
 
+    console.log("[upload-resume] Upload successful", {
+      fileName: file.originalFilename || safeName,
+      blobPath,
+      resumeUrl: blob.url,
+    });
+
     return res.status(200).json({
       success: true,
       fileName: file.originalFilename || safeName,
       resumeUrl: blob.url,
     });
   } catch (error) {
+    console.error("[upload-resume] Upload failed", error);
     return res
       .status(500)
       .json({ success: false, error: "Failed to upload resume." });
@@ -75,3 +91,9 @@ function parseResumeFile(req) {
     });
   });
 }
+
+module.exports.config = {
+  api: {
+    bodyParser: false,
+  },
+};
