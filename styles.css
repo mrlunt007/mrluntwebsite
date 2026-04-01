@@ -904,6 +904,16 @@ button:focus-visible {
   margin-top: 8px;
 }
 
+.form-status--success {
+  color: #1f7a4f;
+  font-weight: 600;
+}
+
+.form-status--error {
+  color: #b42318;
+  font-weight: 600;
+}
+
 .careers-follow {
   margin-top: 1.25rem;
 }
