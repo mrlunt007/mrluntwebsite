@@ -904,6 +904,23 @@ button:focus-visible {
   margin-top: 8px;
 }
 
+.contact-direct {
+  margin-top: 14px;
+  color: var(--muted);
+  font-size: 0.96rem;
+  line-height: 1.55;
+}
+
+.contact-direct a {
+  color: var(--link);
+  font-weight: 600;
+}
+
+.contact-direct--compact {
+  margin-top: 14px;
+  font-size: 0.92rem;
+}
+
 .form-status--success {
   color: #1f7a4f;
   font-weight: 600;
@@ -1187,6 +1204,12 @@ button:focus-visible {
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 12px;
+}
+
+.footer-contact a {
+  color: rgba(226, 232, 240, 0.95);
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
 
 @media (max-width: 900px) {
