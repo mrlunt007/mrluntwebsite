@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Apply — Careers | PrimeSupport</title>
+  <meta
+    name="description"
+    content="Apply for a role at PrimeSupport. Submit your resume, contact details, and a short message—professional support and SDR opportunities."
+  />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#1a365d" />
+  <link rel="canonical" href="careers-apply.html" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Apply — Careers | PrimeSupport" />
+  <meta property="og:site_name" content="PrimeSupport" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <header class="site-header">
+    <div class="container nav">
+      <a href="index.html" class="logo">
+        <img src="assets/logo.png" alt="PrimeSupport logo — outsourced technical support for SaaS" height="48" decoding="async" />
+      </a>
+
+      <nav class="main-nav" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="services.html">Services</a>
+        <a href="about.html">About</a>
+        <a href="careers.html">Careers</a>
+        <a href="index.html#contact" class="btn btn-small">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="section contact-section apply-section" aria-labelledby="apply-heading">
+      <div class="container contact-box apply-box">
+        <div class="contact-intro">
+          <p class="eyebrow">Application</p>
+          <h2 id="apply-heading">Apply</h2>
+          <p>
+            Fields marked with <span class="form-label__req" aria-hidden="true">*</span> are required.
+          </p>
+          <p class="apply-box__back">
+            <a href="careers.html" class="text-link">← Back to open roles</a>
+          </p>
+        </div>
+
+        <form
+          class="contact-form application-form"
+          id="careers-apply-form"
+          action="#"
+          method="post"
+          enctype="multipart/form-data"
+          name="careers-application"
+          data-application-form
+        >
+          <label class="form-label" for="apply-position">Role <span class="form-label__req" aria-hidden="true">*</span></label>
+          <select id="apply-position" name="position" required autocomplete="off">
+            <option value="">Select a role</option>
+            <option value="technical-support-specialist">Technical Support Specialist</option>
+            <option value="sales-development-representative">Sales Development Representative (SDR)</option>
+            <option value="general-application">General Application</option>
+          </select>
+
+          <label class="form-label" for="apply-name">Full Name <span class="form-label__req" aria-hidden="true">*</span></label>
+          <input id="apply-name" type="text" name="full_name" required placeholder="Jordan Smith" autocomplete="name" />
+
+          <label class="form-label" for="apply-email">Email Address <span class="form-label__req" aria-hidden="true">*</span></label>
+          <input id="apply-email" type="email" name="email" required placeholder="you@email.com" autocomplete="email" />
+
+          <label class="form-label" for="apply-phone">Phone Number <span class="form-label__req" aria-hidden="true">*</span></label>
+          <input id="apply-phone" type="tel" name="phone" required placeholder="+1 (555) 000-0000" autocomplete="tel" />
+
+          <label class="form-label" for="apply-location">Location <span class="form-label__req" aria-hidden="true">*</span></label>
+          <input id="apply-location" type="text" name="location" required placeholder="City, State / Country" autocomplete="address-level1" />
+
+          <label class="form-label" for="apply-linkedin">LinkedIn or Portfolio <span class="form-label__opt">(optional)</span></label>
+          <input id="apply-linkedin" type="url" name="linkedin_or_portfolio" inputmode="url" placeholder="https://…" autocomplete="url" />
+
+          <label class="form-label" for="apply-resume">Resume Upload <span class="form-label__req" aria-hidden="true">*</span></label>
+          <input id="apply-resume" type="file" name="resume" required accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" />
+          <p class="form-file-hint">PDF or Word (DOC/DOCX), up to a reasonable file size for email or upload endpoints.</p>
+
+          <label class="form-label" for="apply-message">Short Message / Cover Letter <span class="form-label__req" aria-hidden="true">*</span></label>
+          <textarea id="apply-message" name="cover_letter" rows="6" required placeholder="Tell us why you’re interested and what you’d bring to the role."></textarea>
+
+          <button type="submit" class="btn">Submit application</button>
+          <p class="contact-hint application-form__note" id="apply-status" role="status" aria-live="polite" hidden></p>
+          <p class="contact-hint application-form__note">
+            This form is front-end only until you connect it to your backend, ATS, or email service.
+          </p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <p class="footer-brand">PrimeSupport</p>
+        <p class="footer-tag">
+          Outsourced technical customer support for SaaS and digital product companies—professional, reliable, and built around your customers’ success.
+        </p>
+      </div>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="services.html">Services</a>
+        <a href="about.html">About</a>
+        <a href="careers.html">Careers</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+      <div class="footer-meta">
+        <span>© 2026 PrimeSupport LLC. All rights reserved.</span>
+        <span>Technical support · Customer experience · Retention</span>
+      </div>
+    </div>
+  </footer>
+  <script src="careers-apply.js" defer></script>
+</body>
+</html>
