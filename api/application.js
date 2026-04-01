@@ -10,19 +10,6 @@ module.exports = async function handler(req, res) {
 
   try {
     const body = await getJsonBody(req);
-    console.log("[application] Incoming body fields", {
-      role: body.role || body.position || "",
-      fullName: body.fullName || body.full_name || body.name || "",
-      email: body.email || "",
-      phone: body.phone || "",
-      location: body.location || "",
-      linkedinOrPortfolio: body.linkedinOrPortfolio || body.linkedin_or_portfolio || "",
-      coverLetterLength: String(
-        body.coverLetter || body.cover_letter || body.message || ""
-      ).length,
-      resumeFileName: body.resumeFileName || "",
-      resumeUrl: body.resumeUrl || "",
-    });
 
     const role = body.role || body.position || "";
     const fullName = body.fullName || body.full_name || body.name || "";
@@ -49,13 +36,6 @@ module.exports = async function handler(req, res) {
         error: "Missing required field: resumeUrl.",
       });
     }
-
-    console.log("[application] Email request ready", {
-      role,
-      email,
-      resumeFileName,
-      resumeUrl,
-    });
 
     await resend.emails.send({
       from: "PrimeSupport Careers <onboarding@resend.dev>",

@@ -16,28 +16,19 @@ module.exports = async function handler(req, res) {
 
   try {
     if (!process.env.BLOB_READ_WRITE_TOKEN) {
-      console.error("[upload-resume] Missing BLOB_READ_WRITE_TOKEN");
       return res.status(500).json({
         success: false,
         error: "Blob storage is not configured.",
       });
     }
 
-    console.log("[upload-resume] Starting multipart parse");
     const file = await parseResumeFile(req);
 
     if (!file) {
-      console.log("[upload-resume] No file found in multipart payload");
       return res
         .status(400)
         .json({ success: false, error: "Resume file is required." });
     }
-
-    console.log("[upload-resume] File received", {
-      originalFilename: file.originalFilename,
-      mimetype: file.mimetype,
-      size: file.size,
-    });
 
     if (!ALLOWED_MIME_TYPES.has(file.mimetype || "")) {
       return res.status(400).json({
@@ -57,24 +48,12 @@ module.exports = async function handler(req, res) {
       contentType: file.mimetype || "application/octet-stream",
     });
 
-    console.log("[upload-resume] Upload successful", {
-      fileName: file.originalFilename || safeName,
-      blobPath,
-      resumeUrl: blob.url,
-    });
-
-    console.log("[upload-resume] Returning JSON response", {
-      resumeUrl: blob.url,
-      fileName: file.originalFilename || safeName,
-    });
-
     return res.status(200).json({
       success: true,
       fileName: file.originalFilename || safeName,
       resumeUrl: blob.url,
     });
   } catch (error) {
-    console.error("[upload-resume] Upload failed", error);
     return res
       .status(500)
       .json({ success: false, error: "Failed to upload resume." });
