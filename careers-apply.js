@@ -75,8 +75,17 @@
 
     var uploadData = new FormData();
     uploadData.append("resume", resumeFile);
+    var uploadEndpoint = "/api/upload-resume";
+    var applicationEndpoint = "/api/application";
 
-    fetch("/api/upload-resume", {
+    console.log("[careers-apply] upload request started", {
+      endpoint: uploadEndpoint,
+      fileName: resumeFile.name,
+      fileType: resumeFile.type,
+      fileSize: resumeFile.size,
+    });
+
+    fetch(uploadEndpoint, {
       method: "POST",
       body: uploadData,
     })
@@ -92,18 +101,20 @@
       })
       .then(function (uploadResult) {
         console.log("[careers-apply] Resume upload response", uploadResult);
-        if (!uploadResult || !uploadResult.resumeUrl) {
+        var resumeUrl = uploadResult && (uploadResult.resumeUrl || uploadResult.url || "");
+        if (!resumeUrl) {
           throw new Error("Resume upload did not return a URL.");
         }
-        payload.resumeUrl = uploadResult.resumeUrl || "";
+        payload.resumeUrl = resumeUrl;
         payload.resumeFileName = uploadResult.fileName || payload.resumeFileName;
         console.log("[careers-apply] Sending application payload", {
+          endpoint: applicationEndpoint,
           role: payload.role,
           resumeFileName: payload.resumeFileName,
           resumeUrl: payload.resumeUrl,
         });
 
-        return fetch("/api/application", {
+        return fetch(applicationEndpoint, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload),

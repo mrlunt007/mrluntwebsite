@@ -1,5 +1,5 @@
 const { put } = require("@vercel/blob");
-const { formidable } = require("formidable");
+const formidableLib = require("formidable");
 const fs = require("fs/promises");
 
 const ALLOWED_MIME_TYPES = new Set([
@@ -27,10 +27,17 @@ module.exports = async function handler(req, res) {
     const file = await parseResumeFile(req);
 
     if (!file) {
+      console.log("[upload-resume] No file found in multipart payload");
       return res
         .status(400)
         .json({ success: false, error: "Resume file is required." });
     }
+
+    console.log("[upload-resume] File received", {
+      originalFilename: file.originalFilename,
+      mimetype: file.mimetype,
+      size: file.size,
+    });
 
     if (!ALLOWED_MIME_TYPES.has(file.mimetype || "")) {
       return res.status(400).json({
@@ -56,6 +63,11 @@ module.exports = async function handler(req, res) {
       resumeUrl: blob.url,
     });
 
+    console.log("[upload-resume] Returning JSON response", {
+      resumeUrl: blob.url,
+      fileName: file.originalFilename || safeName,
+    });
+
     return res.status(200).json({
       success: true,
       fileName: file.originalFilename || safeName,
@@ -70,7 +82,10 @@ module.exports = async function handler(req, res) {
 };
 
 function parseResumeFile(req) {
-  const form = formidable({
+  const createForm =
+    formidableLib.formidable || formidableLib.default || formidableLib;
+
+  const form = createForm({
     multiples: false,
     maxFiles: 1,
     maxFileSize: 8 * 1024 * 1024,
