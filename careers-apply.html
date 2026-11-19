@@ -25,7 +25,7 @@
   <header class="site-header">
     <div class="container nav">
       <a href="index.html" class="logo" aria-label="PrimeSupportCo home">
-        <img src="assets/logo.png" alt="PrimeSupportCo" height="48" decoding="async" />
+        <span class="logo__mark">PrimeSupport</span><span class="logo__co">Co</span>
       </a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Open menu">
         <span></span><span></span><span></span>
@@ -55,9 +55,9 @@
     <section class="page-hero">
       <div class="container">
         <p class="eyebrow">Careers</p>
-        <h1>Career inquiry</h1>
+        <h1>Apply</h1>
         <p class="page-subtext">
-          Submit a general inquiry. We review submissions as hiring needs arise and do not publish fabricated openings.
+          Apply to an open role or submit a general application. Fields marked with <span class="form-label__req" aria-hidden="true">*</span> are required.
         </p>
       </div>
     </section>
@@ -87,16 +87,18 @@
           name="careers-application"
           data-application-form
         >
-          <label class="form-label" for="apply-position">Career area of interest <span class="form-label__req" aria-hidden="true">*</span></label>
+          <label class="form-label" for="apply-position">Role or career area <span class="form-label__req" aria-hidden="true">*</span></label>
           <select id="apply-position" name="position" required autocomplete="off">
-            <option value="">Select an area</option>
+            <option value="">Select a role</option>
+            <option value="technical-support-specialist">Technical Support Specialist</option>
+            <option value="sales-development-representative">Sales Development Representative</option>
+            <option value="general-application">General Application</option>
             <option value="information-technology">Information Technology</option>
             <option value="technical-support-service-delivery">Technical Support &amp; Service Delivery</option>
             <option value="sales-business-development">Sales &amp; Business Development</option>
             <option value="recruiting-talent-acquisition">Recruiting &amp; Talent Acquisition</option>
             <option value="client-success-account-management">Client Success &amp; Account Management</option>
             <option value="business-operations">Business Operations</option>
-            <option value="general-application">General Inquiry</option>
           </select>
 
           <label class="form-label" for="apply-name">Full name <span class="form-label__req" aria-hidden="true">*</span></label>

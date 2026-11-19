@@ -129,17 +129,83 @@ ol[role="list"] {
 
 .logo {
   display: inline-flex;
-  align-items: center;
+  align-items: baseline;
+  gap: 0;
   flex-shrink: 0;
-  line-height: 0;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 1.2rem;
+  letter-spacing: -0.03em;
+  color: var(--navy);
+  line-height: 1;
 }
 
-.logo img {
-  height: 48px;
-  width: auto;
-  max-width: min(280px, 52vw);
+.logo__mark {
+  color: var(--navy);
+}
+
+.logo__co {
+  color: var(--blue);
+  font-weight: 600;
+}
+
+.jobs-list {
+  display: grid;
+  gap: 1rem;
+  list-style: none;
+}
+
+.job-card {
   display: block;
-  object-fit: contain;
+  padding: 1.5rem 1.35rem;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--blue);
+  transition: border-color 0.2s var(--ease), box-shadow 0.2s var(--ease);
+}
+
+.job-card:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow);
+}
+
+.job-card__badge {
+  display: inline-block;
+  margin-bottom: 0.65rem;
+  color: var(--blue);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.job-card__title {
+  margin-bottom: 0.55rem;
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--navy);
+}
+
+.job-card__summary {
+  margin-bottom: 1rem;
+  color: var(--muted);
+  font-size: 0.98rem;
+}
+
+.job-card__cta {
+  color: var(--blue);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.job-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  margin: 1rem 0 0;
+  color: var(--slate-light);
+  font-size: 0.9rem;
 }
 
 .nav-toggle {
