@@ -45,9 +45,14 @@ Routes:
 - `managed-it-services.html` — managed IT services
 - `it-staffing.html` — IT staffing & recruiting
 - `technology-solutions.html` — technology consulting & solutions
+- `outsourced-it-support.html` — SEO: outsourced / business IT support
+- `microsoft-365-management.html` — SEO: Microsoft 365 management
+- `technical-recruiting.html` — SEO: technical recruiting
 - `industries.html` — industries
 - `about.html` — about
 - `careers.html` — careers
+- `careers-apply.html` — general career inquiry
 - `contact.html` — contact / consultation
+- `sitemap.xml` / `robots.txt` — search indexing
 
 Legacy `services.html` and outdated career listing URLs redirect via `vercel.json`.

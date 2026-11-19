@@ -38,13 +38,13 @@ module.exports = async function handler(req, res) {
     }
 
     await resend.emails.send({
-      from: "PrimeSupport Careers <onboarding@resend.dev>",
+      from: "PrimeSupportCo Careers <onboarding@resend.dev>",
       to: "contact@primesupportco.com",
       reply_to: email,
-      subject: `New Job Application: ${role}`,
+      subject: `New Career Inquiry: ${role}`,
       html: `
-        <h2>New Job Application</h2>
-        <p><strong>Role:</strong> ${escapeHtml(role)}</p>
+        <h2>New Career Inquiry</h2>
+        <p><strong>Career area:</strong> ${escapeHtml(role)}</p>
         <p><strong>Full Name:</strong> ${escapeHtml(fullName)}</p>
         <p><strong>Email:</strong> ${escapeHtml(email)}</p>
         <p><strong>Phone:</strong> ${escapeHtml(phone)}</p>

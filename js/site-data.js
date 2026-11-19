@@ -27,4 +27,18 @@ window.PrimeSupportCo = {
       summary: "Technology consulting, procurement, and implementation support.",
     },
   ],
+  seoPages: [
+    {
+      name: "Outsourced IT Support",
+      href: "outsourced-it-support.html",
+    },
+    {
+      name: "Microsoft 365 Management",
+      href: "microsoft-365-management.html",
+    },
+    {
+      name: "Technical Recruiting",
+      href: "technical-recruiting.html",
+    },
+  ],
 };
