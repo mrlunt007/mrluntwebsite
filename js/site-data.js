@@ -27,6 +27,12 @@ window.PrimeSupportCo = {
       summary: "Technology consulting, procurement, and implementation support.",
     },
   ],
+  inquiryServices: [
+    "Managed IT Services",
+    "IT Staffing & Recruiting",
+    "Technology Consulting",
+    "General Inquiry",
+  ],
   seoPages: [
     {
       name: "Outsourced IT Support",
@@ -40,5 +46,19 @@ window.PrimeSupportCo = {
       name: "Technical Recruiting",
       href: "technical-recruiting.html",
     },
+  ],
+  pages: [
+    "index.html",
+    "managed-it-services.html",
+    "it-staffing.html",
+    "technology-solutions.html",
+    "outsourced-it-support.html",
+    "microsoft-365-management.html",
+    "technical-recruiting.html",
+    "industries.html",
+    "about.html",
+    "careers.html",
+    "careers-apply.html",
+    "contact.html",
   ],
 };

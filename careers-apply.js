@@ -118,14 +118,14 @@
           return {};
         }).then(function (data) {
           if (!res.ok) {
-            throw new Error(data.error || "Could not send your application.");
+            throw new Error(data.error || "Could not send your career inquiry.");
           }
           return data;
         });
       })
       .then(function () {
         form.reset();
-        showStatus(status, "Application sent successfully. Thank you for applying.", false);
+        showStatus(status, "Career inquiry sent successfully. Thank you for reaching out.", false);
       })
       .catch(function (err) {
         showStatus(status, err.message || "Something went wrong. Please try again.", true);

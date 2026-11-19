@@ -21,6 +21,10 @@
     if (match) select.value = service;
   }
 
+  function isValidEmail(value) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+  }
+
   async function onSubmit(e) {
     e.preventDefault();
     var form = e.target;
@@ -36,7 +40,20 @@
       company: form.elements.company ? form.elements.company.value.trim() : "",
       service: form.elements.service ? form.elements.service.value.trim() : "",
       message: form.elements.message ? form.elements.message.value.trim() : "",
+      website: form.elements.website ? form.elements.website.value.trim() : "",
     };
+
+    if (!payload.name || !payload.email || !payload.company || !payload.service || !payload.message) {
+      setStatus(status, "Please complete all required fields.", true);
+      if (submitBtn) submitBtn.disabled = false;
+      return;
+    }
+
+    if (!isValidEmail(payload.email)) {
+      setStatus(status, "Please enter a valid business email address.", true);
+      if (submitBtn) submitBtn.disabled = false;
+      return;
+    }
 
     try {
       var res = await fetch("/api/contact", {
@@ -54,6 +71,7 @@
       }
 
       form.reset();
+      prefillServiceFromQuery();
       setStatus(status, "Inquiry sent successfully. We will follow up soon.", false);
     } catch (err) {
       setStatus(status, err.message || "Something went wrong. Please try again.", true);

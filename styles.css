@@ -688,6 +688,7 @@ ol[role="list"] {
 
 .contact-form,
 .inquiry-form {
+  position: relative;
   display: grid;
   gap: 0.85rem;
   padding: 1.75rem;
@@ -743,6 +744,15 @@ ol[role="list"] {
 
 .form-status--error {
   color: var(--error);
+}
+
+.hp-field {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
 }
 
 /* —— Footer —— */

@@ -56,3 +56,4 @@ Routes:
 - `sitemap.xml` / `robots.txt` — search indexing
 
 Legacy `services.html` and outdated career listing URLs redirect via `vercel.json`.
+Custom `404.html` is included for unknown routes.

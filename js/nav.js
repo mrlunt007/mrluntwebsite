@@ -1,7 +1,16 @@
 (function () {
+  function syncDropdownAria(dropdown) {
+    var trigger = dropdown.querySelector(".nav-dropdown__trigger");
+    if (!trigger) return;
+    var open = dropdown.getAttribute("data-open") === "true";
+    trigger.setAttribute("aria-expanded", open ? "true" : "false");
+  }
+
   function closeAllDropdowns(except) {
-    document.querySelectorAll(".nav-dropdown[data-open='true']").forEach(function (el) {
-      if (el !== except) el.setAttribute("data-open", "false");
+    document.querySelectorAll(".nav-dropdown").forEach(function (el) {
+      if (el === except) return;
+      el.setAttribute("data-open", "false");
+      syncDropdownAria(el);
     });
   }
 
@@ -10,11 +19,17 @@
       var trigger = dropdown.querySelector(".nav-dropdown__trigger");
       if (!trigger) return;
 
+      if (!trigger.hasAttribute("aria-expanded")) {
+        trigger.setAttribute("aria-expanded", "false");
+      }
+      syncDropdownAria(dropdown);
+
       trigger.addEventListener("click", function (e) {
         e.preventDefault();
         var isOpen = dropdown.getAttribute("data-open") === "true";
         closeAllDropdowns(dropdown);
         dropdown.setAttribute("data-open", isOpen ? "false" : "true");
+        syncDropdownAria(dropdown);
       });
     });
 
@@ -24,7 +39,15 @@
     });
 
     document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape") closeAllDropdowns();
+      if (e.key === "Escape") {
+        closeAllDropdowns();
+        var header = document.querySelector(".site-header");
+        var toggle = document.querySelector(".nav-toggle");
+        if (header && header.classList.contains("is-open")) {
+          header.classList.remove("is-open");
+          if (toggle) toggle.setAttribute("aria-expanded", "false");
+        }
+      }
     });
   }
 
@@ -68,10 +91,17 @@
     });
   }
 
+  function initCopyrightYear() {
+    document.querySelectorAll("[data-year]").forEach(function (el) {
+      el.textContent = String(new Date().getFullYear());
+    });
+  }
+
   function init() {
     initDropdowns();
     initMobileNav();
     initReveal();
+    initCopyrightYear();
   }
 
   if (document.readyState === "loading") {
