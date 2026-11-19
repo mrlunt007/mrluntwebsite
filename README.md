@@ -1,54 +1,53 @@
-# PrimeSupport Website
+# PrimeSupportCo Website
+
+Professional B2B website for PrimeSupportCo — Managed IT Services, Technology Consulting, and IT Talent Solutions.
 
 ## Environment Variables
 
 Create a local env file (for example `.env.local`) with:
 
-RESEND_API_KEY="re_KT8qdCvb_EmRStzZM7nxz7Um5xt4YaTRd"
-BLOB_READ_WRITE_TOKEN="vercel_blob_rw_..."
+```
+RESEND_API_KEY="re_xxxxxxxx"
+BLOB_READ_WRITE_TOKEN="vercel_blob_rw_xxxxxxxx"
+```
 
 ## Install
 
-Install dependencies:
-
-`npm install`
+```
+npm install
+```
 
 ## API Routes (Vercel Functions)
 
-- `api/contact.js` - handles contact form submissions
-- `api/upload-resume.js` - uploads resume files to Vercel Blob
-- `api/application.js` - handles job application submissions
+- `api/contact.js` — business inquiry form submissions
+- `api/upload-resume.js` — resume uploads to Vercel Blob
+- `api/application.js` — career inquiry / application submissions
 
-Both routes:
+Routes:
 
 - Accept `POST` requests only
 - Use `process.env.RESEND_API_KEY`
 - Send emails to `contact@primesupportco.com`
-- Use `onboarding@resend.dev` as the sender
-
-Application flow:
-
-1. Frontend uploads resume to `api/upload-resume.js`
-2. API stores file in Vercel Blob and returns a public URL
-3. Frontend sends application JSON to `api/application.js`
-4. Application email includes resume file name and clickable Blob URL
+- Use `onboarding@resend.dev` as the sender (update when a verified domain is configured)
 
 ## Local Testing
 
 1. Install dependencies: `npm install`
-2. Set environment variables in `.env.local` (see above)
+2. Set environment variables in `.env.local`
 3. Run with Vercel CLI: `vercel dev`
 4. Test pages:
-   - `index.html` contact form
-   - `careers-apply.html` application form
+   - `index.html` / `contact.html` inquiry forms
+   - `careers-apply.html` career inquiry form
 
-## Vercel Deployment Testing
+## Site Structure
 
-1. In Vercel project settings, add `RESEND_API_KEY`
-2. Add `BLOB_READ_WRITE_TOKEN`
-3. Deploy the project
-4. Submit both forms on the deployed site
-5. For job applications, verify:
-   - Resume uploads successfully
-   - Email includes a clickable resume URL
-6. Confirm emails arrive at `contact@primesupportco.com`
+- `index.html` — homepage
+- `managed-it-services.html` — managed IT services
+- `it-staffing.html` — IT staffing & recruiting
+- `technology-solutions.html` — technology consulting & solutions
+- `industries.html` — industries
+- `about.html` — about
+- `careers.html` — careers
+- `contact.html` — contact / consultation
+
+Legacy `services.html` and outdated career listing URLs redirect via `vercel.json`.

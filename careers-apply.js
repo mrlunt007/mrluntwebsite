@@ -8,9 +8,16 @@
   };
 
   var PARAM_TO_VALUE = {
-    "technical-support-specialist": "technical-support-specialist",
-    sdr: "sales-development-representative",
-    "sales-development-representative": "sales-development-representative",
+    "information-technology": "information-technology",
+    it: "information-technology",
+    "technical-support-service-delivery": "technical-support-service-delivery",
+    support: "technical-support-service-delivery",
+    "sales-business-development": "sales-business-development",
+    sales: "sales-business-development",
+    "recruiting-talent-acquisition": "recruiting-talent-acquisition",
+    recruiting: "recruiting-talent-acquisition",
+    "client-success-account-management": "client-success-account-management",
+    "business-operations": "business-operations",
     general: "general-application",
     "general-application": "general-application",
   };

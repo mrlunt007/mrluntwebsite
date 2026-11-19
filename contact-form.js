@@ -7,6 +7,20 @@
     el.classList.add(isError ? "form-status--error" : "form-status--success");
   }
 
+  function prefillServiceFromQuery() {
+    var params = new URLSearchParams(window.location.search);
+    var service = params.get("service");
+    if (!service) return;
+    var select = document.getElementById("contact-service");
+    if (!select) return;
+
+    var options = Array.prototype.slice.call(select.options);
+    var match = options.find(function (opt) {
+      return opt.value === service;
+    });
+    if (match) select.value = service;
+  }
+
   async function onSubmit(e) {
     e.preventDefault();
     var form = e.target;
@@ -20,6 +34,7 @@
       name: form.elements.name ? form.elements.name.value.trim() : "",
       email: form.elements.email ? form.elements.email.value.trim() : "",
       company: form.elements.company ? form.elements.company.value.trim() : "",
+      service: form.elements.service ? form.elements.service.value.trim() : "",
       message: form.elements.message ? form.elements.message.value.trim() : "",
     };
 
@@ -39,7 +54,7 @@
       }
 
       form.reset();
-      setStatus(status, "Message sent successfully. We will get back to you soon.", false);
+      setStatus(status, "Inquiry sent successfully. We will follow up soon.", false);
     } catch (err) {
       setStatus(status, err.message || "Something went wrong. Please try again.", true);
     } finally {
@@ -48,6 +63,7 @@
   }
 
   function init() {
+    prefillServiceFromQuery();
     var form = document.getElementById("contact-form");
     if (!form) return;
     form.addEventListener("submit", onSubmit);

@@ -10,7 +10,7 @@ module.exports = async function handler(req, res) {
 
   try {
     const body = await getJsonBody(req);
-    const { name, email, company, message } = body;
+    const { name, email, company, service, message } = body;
 
     if (!name || !email || !message) {
       return res.status(400).json({
@@ -19,16 +19,19 @@ module.exports = async function handler(req, res) {
       });
     }
 
+    const serviceLabel = service || "Not specified";
+
     await resend.emails.send({
-      from: "PrimeSupport <onboarding@resend.dev>",
+      from: "PrimeSupportCo <onboarding@resend.dev>",
       to: "contact@primesupportco.com",
       reply_to: email,
-      subject: "New Contact Form Submission",
+      subject: `New Business Inquiry — ${serviceLabel}`,
       html: `
-        <h2>New Contact Form Submission</h2>
+        <h2>New Business Inquiry</h2>
         <p><strong>Name:</strong> ${escapeHtml(name)}</p>
         <p><strong>Email:</strong> ${escapeHtml(email)}</p>
         <p><strong>Company:</strong> ${escapeHtml(company || "Not provided")}</p>
+        <p><strong>Service of interest:</strong> ${escapeHtml(serviceLabel)}</p>
         <p><strong>Message:</strong></p>
         <p>${escapeHtml(message).replace(/\n/g, "<br/>")}</p>
       `,

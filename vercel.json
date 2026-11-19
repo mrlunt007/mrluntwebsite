@@ -1,0 +1,29 @@
+{
+  "redirects": [
+    {
+      "source": "/services.html",
+      "destination": "/managed-it-services.html",
+      "permanent": true
+    },
+    {
+      "source": "/services",
+      "destination": "/managed-it-services.html",
+      "permanent": true
+    },
+    {
+      "source": "/careers-technical-support-specialist.html",
+      "destination": "/careers.html",
+      "permanent": true
+    },
+    {
+      "source": "/careers-sales-development-representative.html",
+      "destination": "/careers.html",
+      "permanent": true
+    },
+    {
+      "source": "/careers-general-application.html",
+      "destination": "/careers-apply.html",
+      "permanent": true
+    }
+  ]
+}
